@@ -1,0 +1,20 @@
+-- only the first 3 customers
+	SELECT * 
+	FROM sql_store.customers
+	LIMIT 3			-- if the argument is greater that our query produces
+						get all the customers
+						
+webpage
+	3 customers per page
+	
+	SELECT * 
+	FROM sql_store.customers
+	LIMIT 6, 3		-- offset, to skip the first 6 records, and that pick three records
+
+	
+-- structure	
+SELECT * 
+FROM sql_store.customers
+-- WHERE
+ORDER BY points DESC		
+LIMIT 3

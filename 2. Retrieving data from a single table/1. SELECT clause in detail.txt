@@ -1,0 +1,52 @@
+SELECT first_name, last_name
+	#we can change the order
+	1. column output
+		last_name
+	2. 
+		first_name
+FROM customers
+
+
+#an arithmetic expression
+-- SELECT first_name, last_name, points + 10		#our points increase +10
+-- for clarity
+SELECT first_name, last_name, points, points + 10	# -, *, /, %
+FROM customers
+
+
+SELECT 
+	first_name, 
+	last_name, 
+	points, 
+	points * 10 + 100		# if the line too long, we can brake each column
+				#note multiplication/divide in math higher prioritet
+				()
+FROM customers
+
+
+SELECT 
+	first_name, 
+    last_name, 
+    points, 
+    (points + 10) * 100
+FROM customers
+
+
+#alias, column_name
+SELECT 
+	first_name, 
+    last_name, 
+    points, 
+    (points + 10) * 100 AS discount_factor
+		-- if we have in coumn, we need to add quote or double quotes
+		""
+		'discount factor'
+			
+FROM customers
+
+
+--REMOVE DUPLICATES, distinct
+SELECT DISTINCT state		--state is not duplicated
+FROM customers
+
+	

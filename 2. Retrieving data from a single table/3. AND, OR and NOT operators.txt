@@ -1,0 +1,28 @@
+SELECT * 
+FROM customers
+WHERE birth_date > '1990-01-01' and points > 1000
+
+SELECT * 
+FROM customers
+WHERE birth_date > '1990-01-01' or points > 1000 and state = 'va'
+
+note order
+	1.
+		and
+	2.	
+		or
+	
+#not	
+SELECT * 
+FROM customers
+WHERE not (birth_date > '1990-01-01' or points > 1000) 
+
+#the same result without not
+SELECT * 
+FROM customers
+WHERE birth_date <= '1990-01-01' and points <= 1000 
+
+
+SELECT * 
+FROM order_items
+WHERE order_id = 6 AND unit_price * quantity > 30

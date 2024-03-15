@@ -1,0 +1,47 @@
+-- % any number ocharacters
+-- _ single character
+
+#start with char, LIKE + 'b%', 
+	SELECT *
+	FROM customers
+	WHERE last_name LIKE 'b%'
+
+	SELECT *
+	FROM customers
+	WHERE last_name LIKE 'brush%'
+
+
+#last_name include b in the word
+	SELECT *
+	FROM customers
+	WHERE last_name LIKE '%b%'
+	
+#end with y
+	SELECT *
+	FROM customers
+	WHERE last_name LIKE '%y'
+	
+#single character, exactly 2 characters long and end with y
+	SELECT *
+	FROM customers
+	WHERE last_name LIKE '_y'
+	
+	SELECT *
+	FROM customers
+	WHERE last_name LIKE '_____y'
+	
+	SELECT *
+	FROM customers
+	WHERE last_name LIKE 'b____y'
+	
+	
+SELECT *
+FROM customers
+WHERE address LIKE '%trail%' OR
+	  address LIKE '%avenue%'
+	  
+	  
+	#end not with 9
+		SELECT *
+		FROM customers
+		WHERE phone NOT LIKE '%9' 

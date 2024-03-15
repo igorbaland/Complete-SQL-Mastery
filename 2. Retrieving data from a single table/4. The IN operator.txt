@@ -1,0 +1,27 @@
+#in sql we can not combine a string with a boolean value
+	SELECT * 
+	FROM customers
+	WHERE state= 'VA' OR 'GA' OR 'FL'
+	
+	#solution
+		SELECT * 
+		FROM customers
+		WHERE state= 'VA' OR state = 'GA' OR state = 'FL'
+		
+	#solution IN operator
+		SELECT * 
+		FROM customers
+		WHERE state IN ('VA', 'FL', 'GA')
+			#shorter and easier to understand
+			
+	#NOT + IN
+		SELECT * 
+		FROM customers
+		WHERE state NOT IN ('VA', 'FL', 'GA')
+		
+		
+SELECT *
+FROM products
+WHERE quantity_in_stock IN (49, 38, 72)
+
+		
