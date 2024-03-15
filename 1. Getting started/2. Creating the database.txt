@@ -1,0 +1,48 @@
+administration tab
+	atart and stop server
+	importing or exporting data
+	
+schemas tab
+	sys
+	
+query editor window
+
+contxt help
+
+snippet
+
+showing hiding panels
+
+open sql script icon
+	refresh icon
+		to see schemas
+		
+		we see all the databases that prefixed with sql_*
+
+databases
+	every database we have these objects
+		tables,
+			this is where we store our data
+		views, 
+			which is kind like virtual tables
+		
+		store procedures
+			for getting all the customers in the given city
+		
+		functions
+
+
+execute script
+	yellow thunder icon
+	
+Foreign Id
+	we use foreign id to identify, who placed each order
+		we are refering to this customer using teir
+			customer_id
+				john smith have placed multiple orders in our system
+					if any information change about our customer
+							it is the only one place that we have to modify
+				
+dummy data == pseudo data
+	
+

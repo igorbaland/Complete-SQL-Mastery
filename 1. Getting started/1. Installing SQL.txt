@@ -1,0 +1,38 @@
+#database server
+www.mysql.com
+	downloads
+		MySQL Community Server Edtition
+			#absolutely free
+			
+			MySQL Community server	(Choose OS)
+			
+				no thanks, start my download
+				
+Installation
+	execute downloaded file. This will launch our instalation wizard
+		agree
+			execute mysql configurator
+				development computer
+					password:
+					
+
+#run mysql server			
+#windows
+	services (dienste)
+		mysql starten
+					
+								
+#gui to connect to the mysql server
+mySQL Workbrench
+	
+	delete connection
+		right click on the connection
+			delete 
+			
+	create connection
+		+ icon
+			
+	
+	
+	
+		

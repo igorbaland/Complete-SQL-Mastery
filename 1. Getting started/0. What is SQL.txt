@@ -1,0 +1,51 @@
+Database is a collection of data stored in a format
+	that can easily be accessed 
+	
+We use a software application called database management systems
+	DBMS
+		we connect to DBMS and give it 
+			instructions for 
+				querying ormodifaction data.
+				
+				The DBMS will execute our instructions and 
+					send result back
+					
+PC   --->	DBMS	---> Database
+	<---		
+	
+We have several DBMS, these are clasified into two categories
+	1.
+	realational
+		we store data in tables that are linked to each other using relationships
+		
+		SQL is the language that we use to work with these relational database management system RDBMS
+			we use SQL
+				to query or modify our data
+	
+	2.
+	NoSQL(non-relational)
+		we don't have 
+			tables or relationships. These databases is very different from relationshiop
+			
+			Note: NoSQL DBMS doesn't understand SQL. They have each own query language
+	
+
+
+RDBMS, some of the most popular
+	MySQL
+	SQL Server
+	Oracle
+	
+	Each RDBMS
+		has a different flayer of managin sql,
+			but all these implementation are very similar and base of standard sql specification
+			
+MySQL
+	is the most popular in the world
+	
+	SEQUEL
+		Structured
+		English
+		Query
+		Language
+			
