@@ -1,0 +1,16 @@
+-- implicit join syntax, better way
+SELECT *
+FROM orders o
+JOIN customers c
+	ON o.customer_id = c.customer_id
+	
+	
+-- across join, worst way
+SELECT *
+FROM orders o, customers c
+WHERE o.customer_id = c.customer_id
+	-- let's say, we have forget to type where clause
+	-- we get all records from customer and order table
+	
+	-- this is what we call 
+		across join

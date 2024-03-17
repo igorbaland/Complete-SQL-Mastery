@@ -1,0 +1,9 @@
+-- not recommended, because sometimes represents unexpected results
+	SELECT 
+		o.order_id,
+		c.first_name
+	FROM orders o
+	NATURAL JOIN customers c
+	
+	-- natural join are easy to code, but they can be a little dangerous
+		because we are letting the database engine, figure out or guess the join

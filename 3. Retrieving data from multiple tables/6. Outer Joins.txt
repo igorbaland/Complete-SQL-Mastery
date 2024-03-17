@@ -1,0 +1,19 @@
+we have two types of joins
+	inner join inner keyword is optional, we don' need to type inner
+	outer join		-- is optional too, we don't have to type
+		in sql we have two types of outer joins 
+			left
+				all the records  from the left table are re returned
+					FROM tableName
+			right
+				JOIN tableName
+			
+SELECT 
+	c.customer_id, 
+    c.first_name,
+    o.order_id
+FROM customers c
+LEFT JOIN orders o
+	ON c.customer_id = o.customer_id
+ORDER BY c.customer_id
+	

@@ -1,0 +1,35 @@
+we use cross joins to combine or join every record 
+	from the first table with every record in the second table
+
+-- explicit
+-- better way, clear
+SELECT 
+	c.first_name AS customer,
+    p.name AS product
+FROM customers c
+CROSS JOIN products p
+ORDER BY c.first_name
+	
+	-- implicit
+	-- the same way, but doesn't clear, 
+	SELECT 
+		c.first_name AS customer,
+		p.name AS product
+	FROM customers c, orders o
+	ORDER BY c.first_name	
+	
+-- implicit
+SELECT *
+FROM shippers s, products p
+
+-- explicit
+SELECT *
+FROM shippers s
+CROSS JOIN products p	
+
+
+CROSS JOIN, real example for using
+	where we have a table of sizes like small, medium, large
+		and a table of colors like red, blue, green... and we want to combine all the sizes
+			to all the colors.
+				That is when we use a cross join

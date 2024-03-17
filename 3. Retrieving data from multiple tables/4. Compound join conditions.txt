@@ -1,0 +1,11 @@
+#composite primary key = contains more than one column
+-- keeps notes, we use to keep noted for each order items
+
+-- Compound join condition
+	we have multiple conditions to join these two tables
+	
+SELECT *
+FROM order_items oi
+JOIN order_item_notes oin
+	ON oi.order_id = oin.order_id
+    AND oi.product_id = oin.product_id
