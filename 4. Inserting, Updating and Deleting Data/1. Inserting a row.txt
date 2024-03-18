@@ -1,0 +1,30 @@
+INSERT INTO customers
+VALUES(
+	DEFAULT, 		-- AUTOINCREMENT = DEFAULT better, but we can pass id
+    'John', 
+    'Smith', 
+    '1990-01-01', 
+    NULL,			-- can pass DEFAULT or NULL
+    'address',
+    'city',
+    'CA',
+    DEFAULT			-- can pass NULL or DEFAULT
+    )		
+	
+	-- with approach we define the order of column
+	INSERT INTO customers (
+		first_name, 
+		last_name, 
+		birth_date,
+		address,
+		city,
+		state
+		)
+		VALUES(
+			'John', 
+			'Smith', 
+			'1990-01-01', 
+			'address',
+			'city',
+			'CA'
+			)		

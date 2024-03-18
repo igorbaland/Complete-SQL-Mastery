@@ -1,0 +1,4 @@
+Workbrench
+	File
+		OpenSqlScript
+			execute script

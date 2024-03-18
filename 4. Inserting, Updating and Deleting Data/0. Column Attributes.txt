@@ -1,0 +1,17 @@
+datatype
+	diff between 
+		varchar
+			
+		char
+			if we have char(50) and the name of customer was only 5 chars long
+				mysql will insert additional 45 chars to fill this column
+					waste of memory space
+					
+	pk
+		primary key
+	nn
+		not null
+	ai
+		autoincrement
+	default value /expression
+		
