@@ -1,0 +1,99 @@
+-- how to use aggregate functions in SQL
+
+	MAX()
+		calculatin the maxium in a siries of values
+	MIN()
+	AVG()
+	SUM()
+	COUNT
+	
+	
+SELECT 
+	MAX(invoice_total) AS highest,		-- we can also add a string type, for example date, the last date
+    MIN(invoice_total) AS lowest,
+    AVG(invoice_total) AS  average
+FROM invoices
+
+
+SELECT 
+	MAX(invoice_total) AS highest,
+    MIN(invoice_total) AS lowest,
+    AVG(invoice_total) AS  average,
+    SUM(invoice_total) AS total,
+    COUNT(invoice_total) AS number_of_invoices
+FROM invoices
+
+	-- if we have a null value in columns, it' not be included in these functions
+	-- only not null values
+	
+		COUNT(*) RETRUN count all values with null
+		
+		
+		SELECT 
+			MAX(invoice_total) AS highest,
+			MIN(invoice_total) AS lowest,
+			AVG(invoice_total) AS  average,
+			SUM(invoice_total) AS total,
+			COUNT(invoice_total) AS number_of_invoices,
+			COUNT(payment_date) AS count_payments,
+			COUNT(*) AS total_records
+		FROM invoices
+
+
+-- agragate functions with expression
+	 SUM(invoice_total * 1.1) AS total,
+	 
+SELECT 
+	MAX(invoice_total) AS highest,
+    MIN(invoice_total) AS lowest,
+    AVG(invoice_total) AS  average,
+    SUM(invoice_total * 1.1) AS total,
+    COUNT(invoice_total) AS number_of_invoices,
+    COUNT(payment_date) AS count_payments,
+    COUNT(*) AS total_records
+FROM invoices
+WHERE invoice_date > '2019-07-01'
+
+-- by default all values take duplicate values
+	- if we want to exclude duplicates we have to use a
+		DISTINCT
+		
+SELECT 
+	MAX(invoice_total) AS highest,
+    MIN(invoice_total) AS lowest,
+    AVG(invoice_total) AS  average,
+    SUM(invoice_total * 1.1) AS total,
+    COUNT(invoice_total) AS number_of_invoices,
+    COUNT(payment_date) AS count_payments,
+    COUNT(DISTINCT client_id) AS total_records
+FROM invoices
+WHERE invoice_date > '2019-07-01'
+
+
+
+SELECT
+	'First half of 2019' AS date_range,
+    SUM(invoice_total) AS total_sales,
+    SUM(payment_total) AS total_payments,
+    SUM(invoice_total) AS what_we_expect
+FROM invoices
+WHERE invoice_date 
+	BETWEEN '2019-01-01' AND '2019-06-01'
+UNION
+SELECT
+	'Second half of 2019' AS date_range,
+    SUM(invoice_total) AS total_sales,
+    SUM(payment_total) AS total_payments,
+    SUM(invoice_total) AS what_we_expect
+FROM invoices
+WHERE invoice_date 
+	BETWEEN '2019-07-01' AND '2019-12-31'
+UNION
+SELECT
+	'Total' AS date_range,
+    SUM(invoice_total) AS total_sales,
+    SUM(payment_total) AS total_payments,
+    SUM(invoice_total) AS what_we_expect
+FROM invoices
+WHERE invoice_date 
+	BETWEEN '2019-01-01' AND '2019-12-31'	
