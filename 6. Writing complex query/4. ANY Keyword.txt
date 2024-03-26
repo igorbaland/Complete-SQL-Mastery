@@ -1,0 +1,27 @@
+-- Select clients with at least two invoices
+
+ANY, SOME, IN they are equivalent
+
+USE sql_invoicing;
+
+SELECT *
+FROM clients
+WHERE client_id IN (
+	SELECT client_id
+	FROM invoices
+	GROUP BY client_id
+	HAVING COUNT(*) >= 2		-- filter
+)
+
+-- IN == ANY
+
+USE sql_invoicing;
+
+SELECT *
+FROM clients
+WHERE client_id = ANY (				-- SOME
+	SELECT client_id
+	FROM invoices
+	GROUP BY client_id
+	HAVING COUNT(*) >= 2
+)

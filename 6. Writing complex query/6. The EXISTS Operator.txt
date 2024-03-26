@@ -1,0 +1,45 @@
+-- Select clients that have an invoice
+
+-- 1.
+SELECT *
+FROM clients
+WHERE  client_id IN (
+	SELECT DISTINCT client_id
+    From invoices
+)
+	-- what if in this table 
+		100, 1000 or 1 kk id's, that have an invoice
+			we are going end with a very, very large list
+				And this will have negative impact on the performance
+					In situations like this it is more efficient to use 
+						EXISTS operator
+
+
+
+
+-- 2. using the EXISTS Operator 
+SELECT *
+FROM clients c
+WHERE EXISTS (
+	SELECT client_id
+    FROM invoices
+    WHERE client_id = c.client_id
+)
+
+	-- when we use the EXISTS operator
+		the subquery doesn't actually return a result to the outer query.
+			Instead it will return an indication of wheter any rows in subquery matches
+			these search condition
+
+
+-- Find the products that have never been ordered
+USE sql_store;
+
+SELECT *
+FROM products p
+WHERE NOT EXISTS (
+	SELECT product_id
+    FROM order_items
+    WHERE product_id = p.product_id
+)
+		

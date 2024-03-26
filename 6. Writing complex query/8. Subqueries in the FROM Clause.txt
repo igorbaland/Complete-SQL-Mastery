@@ -1,0 +1,18 @@
+-- we can get this table in memory and treat it like a real table in our database
+	We can join it with another table using the client 
+	
+SELECT *
+FROM (
+	SELECT
+		client_id,
+		name,
+		(SELECT SUM(invoice_total)
+			FROM invoices
+			WHERE client_id = c.client_id) AS total_sales,
+		(SELECT AVG (invoice_total) FROM invoices) AS average,
+		(SELECT total_sales - average) AS difference
+	FROM clients c
+) AS sales_summary
+WHERE total_sales IS NOT NULL
+
+

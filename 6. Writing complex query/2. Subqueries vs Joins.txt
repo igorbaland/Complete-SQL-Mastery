@@ -1,0 +1,41 @@
+SELECT *
+FROM clients
+WHERE client_id NOT IN (
+	SELECT DISTINCT client_id
+    FROM invoices
+)
+
+SELECT *
+FROM clients
+LEFT JOIN invoices USING (client_id)
+WHERE invoice_id IS NULL
+
+
+Performance and readability
+	assume both these queries have the same exucution time,
+		we should go for a query that is most readable
+			In this example, the first is better readable
+	
+
+-- Subqueries	
+USE sql_store;
+
+SELECT *
+FROM customers
+WHERE customer_id IN(
+	SELECT o.customer_id
+    FROM order_items oi
+    JOIN orders o USING(order_id)
+    WHERE product_id = 3
+)
+
+-- join
+USE sql_store;
+
+SELECT DISTINCT customer_id, first_name, last_name
+FROM customers
+JOIN orders o USING (customer_id)
+JOIN order_items oi USING (order_id)
+WHERE oi.product_id = 3
+
+

@@ -1,0 +1,30 @@
+USE sql_invoicing;
+
+SELECT *
+FROM invoices
+WHERE invoice_total > (
+	SELECT MAX(invoice_total)
+	FROM invoices
+	WHERE client_id = 3
+)
+
+-- another way to solve this problem
+	-- ALL keyword
+		
+		WHERE invoice_total > ALL (150, 130, 167, ...)
+		for each row it will compare the invoice_total
+			with all values
+			
+			ALL > list
+				
+		
+		
+USE sql_invoicing;
+
+SELECT *
+FROM invoices
+WHERE invoice_total > ALL (
+	SELECT invoice_total
+    FROM invoices
+    WHERE client_id = 3
+)
