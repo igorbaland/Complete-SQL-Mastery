@@ -1,0 +1,22 @@
+SELECT DATE_ADD(NOW(), INTERVAl 1 DAY)
+	-- tommorow, +1 day
+
+SELECT DATE_ADD(NOW(), INTERVAl -1 YEAR)
+	-- last year
+		-- or we can use DATE_SUB
+		SELECT DATE_SUB(NOW(), INTERVAl 1 YEAR)
+		
+-- difference between two dates
+SELECT DATEDIFF('2019-01-05', '2019-01-01')
+	returns 
+		4
+		
+SELECT DATEDIFF('2019-01-05 09:00', '2019-01-01 17:00')
+	returns 
+		4  -- if we switch the arguments we get
+											-4
+											
+SELECT TIME_TO_SEC('09:00')
+	32400	-- seconds elapsed since midnight
+SELECT TIME_TO_SEC('09:00') - TIME_TO_SEC('09:02')
+	-120

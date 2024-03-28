@@ -1,0 +1,17 @@
+SELECT ROUND(5.73)
+	SELECT ROUND(5.73, 1)
+		-- 5.7
+	SELECT ROUND(5.7345, 2)
+		-- 5.73
+	SELECT TRUNCATE (5.7345, 2)
+		-- without round, only 2 digets
+	SELECT CELING(5.2)
+	
+	SELECT ABS(5.2)   -- absolute value of a number
+	
+	SELECT RAND ()  -- generating random floating between 0 and 1
+	
+list all functions
+	googln
+	mysql numeric functions
+	

@@ -1,0 +1,31 @@
+SELECT NOW()
+	2023-03-11 12:43:49
+CURDATE()	-- without the time component
+CURTIME()	-- without the date component
+	SELECT NOW(), CURDATE(), CURTIME()
+	
+extract date
+SELECT YEAR(NOW())
+	2019
+SELECT MONTH(NOW())
+	3
+	
+	HOURS
+	MINUTES
+	SECOND
+	
+		-- all these functions return a string
+		
+-- but we can return a string too
+SELECT DAYNAME(NOW())	
+		Monday
+		
+		MONHNAME(NOW())
+		March
+		
+SELECT EXTRACT(DAY FROM NOW())	-- 1. MONTH, DAY, SECOND
+									-- MONTH FROM NOW()
+									
+SELECT *
+FROM orders
+WHERE YEAR(order_date) = YEAR(NOW())								

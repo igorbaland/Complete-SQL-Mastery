@@ -1,0 +1,14 @@
+DATE_FORMAT(NOW(), '%M', '%d', '%y')
+	Y -> 2019
+	y -> 19
+	
+	M -> March
+	m -> 03
+
+-- list all combination
+	mysql date format string
+	
+TIME_FORMAT(NOW(); '%H:%i %p')
+	-- hour
+	minutes
+	pm/am

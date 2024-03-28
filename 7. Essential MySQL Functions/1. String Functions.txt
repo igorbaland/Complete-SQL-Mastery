@@ -1,0 +1,38 @@
+SELECT LENGTH('sky')	
+	-- return 3
+	-- GET THE NUMBER OF CHARACTERS IN A STRING
+
+SELECT UPPER('sky')
+		LOWER('')
+		
+LTRIM('   Sky')	-- l left trim, remove spaces
+	RTRIM('Sky   ')  -- right trim
+	TRIM()	-- remove any spaces
+	
+LEFT('Kindergarten', 4)
+	- return the first 4 characters
+
+RIGHT('Kendergarten', 6)
+	-- garten	
+
+SUBSTRING('Kindergarten', 3, 5) -- 2. argument startAt
+									3. return 5 characters
+	-- nderg
+
+SELECT LOCATE('n', 'Kindergarten')	-- return the first n
+	return 3
+
+SELECT LOCATE('n', 'Kindergarten')	-- doesn't exist
+	return 0
+
+SELECT LOCATE('garten', 'Kindergarten')  -- return the first position of garten
+	return 7
+
+SELECT REPLACE('Kindergarten', 'garten', 'garden')  
+	return Kindergarden
+
+SELECT CONCAT('fist', 'last')		-- use for concatenating two strings
+	return firstlast
+	
+
+	
