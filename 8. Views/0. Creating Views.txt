@@ -1,0 +1,38 @@
+-- create views
+USE sql_invoicing;
+
+CREATE VIEW sales_by_client AS
+SELECT
+	c.client_id,
+    c.name,
+    SUM(invoice_total) AS total_sales
+FROM clients c
+JOIN invoices i USING (client_id)
+GROUP BY client_id, name
+
+
+-- use views
+	-- view behaves like a virtual table, but remember, views don't 
+		store data. Our data is actually stored in our tables
+SELECT *
+FROM sales_by_client
+JOIN clients USING (client_id)
+
+
+-- Create a view to see the balance
+-- for each client.
+--
+-- clients_balance
+
+-- client_id
+-- name
+-- balance
+
+CREATE VIEW clients_balance AS
+SELECT 
+	c.client_id,
+    c.name,
+    SUM(invoice_total - payment_total) AS balance
+FROM clients c
+JOIN invoices i USING (client_id)
+GROUP BY client_id, name

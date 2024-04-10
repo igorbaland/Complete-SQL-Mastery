@@ -1,0 +1,20 @@
+Views:
+	1. can simpflify our queries
+	2. Reduce the impact of changes to our database design
+		Imagine we have 10 queries written on top of the invoice table
+		Tomorrow we decide to make a changes in this table
+			- rename this table
+			- one of its it's columns
+			- one of the columns in this table to a different table
+			
+			What will happen to our queries?
+			We will have to come back and fix all those queries that 
+			reference this table
+			
+			Solution
+				- alias
+					with this solution, 
+						we have only one place to change modification
+							- in our view
+	
+	3. Restrict access to the data
