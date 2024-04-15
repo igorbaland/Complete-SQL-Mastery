@@ -1,0 +1,38 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_unpaid_invoices_for_client`(
+	client_id INT
+)
+BEGIN
+	SELECT COUNT(*), SUM(invoice_total)
+    FROM invoices i
+    WHERE i.client_id = client_id 
+		AND payment_total = 0;
+END
+
+
+
+-- input and output parameters
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_unpaid_invoices_for_client`(
+	client_id INT,
+    -- out keyword, marks these parameters as a output
+    OUT invoices_count TINYINT,
+    OUT invoices_total DECIMAL(9, 2)
+)
+BEGIN
+	SELECT COUNT(*), SUM(invoice_total)
+    -- INTO, reading these values and copying them into these output parameters
+    INTO invoices_count, invoices_total
+    FROM invoices i
+    WHERE i.client_id = client_id 
+		AND payment_total = 0;
+END
+
+-- execute
+
+-- user defined variables. Variable is an object that we can use to store a single value in memory
+-- to define a variable, we need to prefix it with an @ sign, and initializing these to 0
+set @invoices_count = 0;
+set @invoices_total = 0;
+call sql_invoicing.get_unpaid_invoices_for_client
+	(3, @invoices_count, @invoices_total);
+select @invoices_count, @invoices_total;

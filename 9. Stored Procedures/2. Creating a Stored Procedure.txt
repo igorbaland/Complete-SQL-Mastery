@@ -1,0 +1,25 @@
+-- dellimitter functions
+DELIMITER $$
+CREATE PROCEDURE get_clients()
+BEGIN
+	SELECT * FROM clients;
+END$$
+
+DELIMITER ;
+
+
+
+-- in our sql statements
+CALL get_clients()
+
+
+--
+DELIMITER $$
+CREATE PROCEDURE get_invoices_with_balance()
+BEGIN
+	SELECT *
+	FROM invoices_with_balance
+	WHERE balance > 0 ;
+END$$
+
+DELIMITER ;

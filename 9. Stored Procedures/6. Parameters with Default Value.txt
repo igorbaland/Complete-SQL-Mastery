@@ -1,0 +1,79 @@
+If didn't choose parameter
+	we want return default parameter 
+
+DROP PROCEDURE IF EXISTS get_clients_by_states;
+
+DELIMITER $$
+CREATE PROCEDURE get_clients_by_state
+(
+	state CHAR(2) 
+)
+BEGIN
+	IF state IS NULL THEN 
+		SET state = 'CA';
+	END IF;
+    
+	SELECT * FROM clients
+    WHERE state = state;
+END $$
+
+DELIMITER ;
+
+
+
+-- What if instead of returning the clients in California
+	we want to return all clients
+
+-- amateur
+DROP PROCEDURE IF EXISTS get_clients_by_states;
+
+DELIMITER $$
+CREATE PROCEDURE get_clients_by_state
+(
+	state CHAR(2) 
+)
+BEGIN
+	IF state IS NULL THEN 			-- amateur, because we can combine these 2 queries into a single query
+		SELECT * FROM clients;
+	ELSE 
+		SELECT  * FROM  clients c
+        WHERE c.state = state;
+	END IF;
+    
+	SELECT * FROM clients
+    WHERE state = state;
+END $$
+
+DELIMITER ;
+
+
+-- better way
+DROP PROCEDURE IF EXISTS get_clients_by_states;
+
+DELIMITER $$
+CREATE PROCEDURE get_clients_by_state
+(
+	state CHAR(2) 
+)
+BEGIN
+	SELECT * FROM clients
+    WHERE state = IFNULL(state, c.state);
+END $$
+
+DELIMITER ;
+
+
+--
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_payments`(
+	client_id INT,
+    payment_method_id TINYINT
+)
+BEGIN
+	SELECT *
+    FROM payments p
+    WHERE
+		p.client_id = IFNULL(client_id, p.client_id) AND
+        p.payment_method = IFNULL(payment_method_id, p.payment_method);
+END$$
+DELIMITER ;

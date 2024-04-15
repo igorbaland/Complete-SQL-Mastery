@@ -1,0 +1,15 @@
+SQL Statements
+	We are not going to write them in our application code for a couple reasons
+		- it will make our application code messy and hard to maintain
+			for example, when we are building our application with java
+				we don't want to mix our Java code with SQL
+					- code messy
+					- hard maintain
+					- recompile code (java, if we have some changes in sql)
+			- for these reasons, we should take our SQL code of our application code
+				and store it in a database where it belongs
+				
+Stored Procedure/Function
+	- store and organize SQL
+	- faster execution
+	- Data security

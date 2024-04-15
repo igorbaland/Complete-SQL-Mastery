@@ -1,0 +1,9 @@
+Prefixes for names
+	fn_ 
+		functions
+	
+	proc_
+		procedures
+	procGetRiskFactor
+		getRiskFactor
+		get_risk_factor

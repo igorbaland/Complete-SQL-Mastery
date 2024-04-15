@@ -1,0 +1,43 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `make_payment`(
+	invoice_id INT,
+    payment_amount DECIMAL(9, 2),
+    payment_date DATE
+)
+BEGIN
+	UPDATE invoices i
+    SET 
+		i.payment_total = total_amount,
+        i.payment_date = payment_date
+	WHERE i.invoice_id = invoice_id;
+END
+
+
+-- what if we pass a negative value, when we are calling this procedure with a negative value?
+call sql_invoicing.make_payment(2, -100, '2019-01-01');
+
+
+
+
+-- solution
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `make_payment`(
+	invoice_id INT,
+    payment_amount DECIMAL(9, 2),
+    payment_date DATE
+)
+BEGIN
+	IF payment_amount <= 0 THEN
+		-- googln for sqlstate errors
+			-- www.ibm.com/.. is better
+				-- the first 2 letters specify the class error
+					-- as a string, not a number
+		SIGNAL SQLSTATE '22003' 
+			SET MESSAGE_TEXT = 'Invalid payment amount';
+	END IF;
+
+	UPDATE invoices i
+    SET 
+		i.payment_total = total_amount,
+        i.payment_date = payment_date
+	WHERE i.invoice_id = invoice_id;
+END
