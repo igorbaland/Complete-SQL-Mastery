@@ -1,0 +1,34 @@
+Event
+	is a task or block  of SQL code that gets executed according to a schedule
+	
+	It's can get execute once or on a reguler basis like every day at 10 am or once a moth, and so on
+
+With events we can automate database maintance task such as 
+	- deleting stale data
+	- copying data from one table into an archive table, or aggregating to generate reports
+
+-- list events
+SHOW EVENTS
+
+
+
+
+
+-- create an event
+
+DELIMITER $$
+
+CREATE EVENT yearly_delete_stale_audit_rows
+ON SCHEDULE
+	-- only once execution
+    -- AT '2019-05-01'
+    -- regular execution
+    -- EVERY 1 HOUR
+    -- EVERY 2 DAY
+    EVERY 1 YEAR STARTS '2019-01-01' ENDS '2029-01-01'
+DO BEGIN
+	DELETE FROM payments_audit
+    WHERE action_date < NOW() - INTERVAL 1 YEAR;
+END $$
+
+DELIMITER ;

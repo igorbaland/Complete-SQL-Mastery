@@ -1,0 +1,22 @@
+DROP TRIGGER IF EXISTS payments_after_insert;
+
+as the best practice, we should have drop and create in one script file.
+like this:
+
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS payments_after_insert;
+
+CREATE TRIGGER payments_after_insert
+	-- BEFORE, UPDATE/DELETE
+	AFTER INSERT ON payments
+    FOR EACH ROW 
+BEGIN
+	UPDATE invoices
+										-- OLD
+    SET payment_total = payment_total + NEW.amount
+    WHERE invoice_id = NEW.invoice_id;
+END $$
+
+DELIMITER ;
+

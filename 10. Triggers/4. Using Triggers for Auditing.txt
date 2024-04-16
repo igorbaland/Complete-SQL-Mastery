@@ -1,0 +1,77 @@
+Another common use case  for triggrs is logging changes to the data for auditing.
+For example, whenever someone inserts or delete a record, we can log that somewhere
+Later we can come back and see who made that changes and when.
+
+-- create table for store audit
+USE sql_invoicing; 
+
+CREATE TABLE payments_audit
+(
+	client_id 		INT 			NOT NULL, 
+    date 			DATE 			NOT NULL,
+    amount 			DECIMAL(9, 2) 	NOT NULL,
+    action_type 	VARCHAR(50) 	NOT NULL,
+    action_date 	DATETIME 		NOT NULL
+)
+
+
+-- insert data into audit_table  after_insert
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS payments_after_insert;
+
+CREATE TRIGGER payments_after_insert
+	-- BEFORE, UPDATE/DELETE
+	AFTER INSERT ON payments
+    FOR EACH ROW 
+BEGIN
+	UPDATE invoices
+										-- OLD
+    SET payment_total = payment_total + NEW.amount
+    WHERE invoice_id = NEW.invoice_id;
+    
+    INSERT INTO payments_audit
+    VALUES (NEW.client_id, NEW.date, NEW.amount, 'Insert', NOW());
+END $$
+
+DELIMITER ;
+
+
+-- insert data into audit_table, after_delete 
+
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS payments_after_delete;
+
+CREATE TRIGGER payments_after_delete
+	AFTER DELETE ON payments
+    FOR EACH ROW
+BEGIN 
+	UPDATE invoices
+    SET payment_total = payment_total - OLD.amount
+    WHERE invoice_id = OLD.invoice_id;
+    
+    INSERT INTO payments_audit
+    VALUES (OLD.client_id, OLD.date, OLD.amount, 'Delete', NOW());
+END $$
+
+DELIMITER ;
+
+
+-- test insert
+INSERT INTO payments
+VALUES (DEFAULT, 5, 3, '2019-01-01', 10, 1)
+--
+SELECT * FROM sql_invoicing.payments_audit;
+
+
+
+-- test delete
+DELETE FROM payments
+WHERE payment_id = 11
+--
+SELECT * FROM sql_invoicing.payments_audit;
+
+
+
+

@@ -1,0 +1,7 @@
+SHOW TRIGGERS
+
+
+
+SHOW TRIGGERS LIKE 'payments%'
+
+-- table_before-insert

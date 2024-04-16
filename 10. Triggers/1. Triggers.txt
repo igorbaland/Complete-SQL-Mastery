@@ -1,0 +1,57 @@
+A trigger is a block of SQL code that automatically gets executed before or after an insert, update or delete statement.
+Quite often, we use triggers to enforce data consistency.
+For example:
+	in our sql store database, we can have multiple payments towards a given invoice. 
+	Whenever we insert a new record in the payment table, we should make sure that the payment_total column i the invoice table
+		gets updated
+			And this is where we use the a trigger
+
+
+
+-- create trigger
+DELIMITER $$
+
+CREATE TRIGGER payments_after_insert
+	-- BEFORE, UPDATE/DELETE
+	AFTER INSERT ON payments
+    FOR EACH ROW 
+BEGIN
+	UPDATE invoices
+					-- OLD
+    SET payment_total = payment_total + NEW.amount
+    WHERE invoice_id = NEW.invoice_id;
+END $$
+
+DELIMITER ;
+
+
+-- test trigger
+INSERT INTO payments
+VALUES (DEFAULT, 5, 3, '2019-01-01', 10, 1)
+
+
+
+
+
+
+------------------
+-- delete trigger
+DELIMITER $$
+
+CREATE TRIGGER payments_after_delete
+	AFTER DELETE ON payments
+    FOR EACH ROW
+BEGIN 
+	UPDATE invoices
+    SET payment_total = payment_total - OLD.amount
+    WHERE invoice_id = OLD.invoice_id;
+END $$
+
+DELIMITER ;
+
+--test
+SELECT * FROM sql_invoicing.payments;
+
+DELETE
+FROM payments
+WHERE payment_id = 10
