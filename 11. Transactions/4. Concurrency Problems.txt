@@ -1,0 +1,51 @@
+Problems
+	1. Lost updates
+		when two transactions try to update the same data and we don't use locks.
+			In this situation the transaction that commits later will override the changes by the previous transaction
+		For example
+			Let's say we have two transactions
+				that try to update the same customer. 
+					1. tries to increet the points
+					2. tries to update the state for this customer
+						
+			How can we prevent this from hapenning?
+				We use locks
+				
+	2. Dirty Reads
+		when a transaction reads data that hasn't be commited yet.
+			For example:
+				Transaction A
+					changes the points for our customer from 10 to 20
+						but before it commits the changes
+						
+						Transaction B rates this customer 
+							and based on the customers points make a decision.
+								
+									
+									to solve this problem we need to provide a level
+										of isolation arount our transactions
+									Data modified by transactions is not immediately visible
+									to other transactions, unless it's comitted.
+			The standard SQL defines for transaction isolation levels
+				1. Read committed
+					when we use this isolation lvl for transaction
+						that transaction can only read 
+							committed data
+								with this we don't have dirty reads.
+								
+								
+	3. Non-repeating Reads
+		By adding more isolation to our transaction,
+			we can guarantee
+				that the transaction can only read committed data.
+					But what if during a cours of a transaction, we read something twice 
+						and get different results.
+						
+						Solution
+							Repeatable Read
+								See the Snapshots
+							
+							
+	4. Phantom Reads
+		
+		Serializabe					

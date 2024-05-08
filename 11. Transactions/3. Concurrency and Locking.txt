@@ -1,0 +1,38 @@
+In the real world it's quite possible that two or more users may try to access the same data at the same time.
+	This is what we call concurrency
+
+	Concurrency can become a problem when one user modifies the data 
+		that other users are trying to retrieve or modify. 
+
+How MySQL handles concurrency by default
+Simulate 2 users are trying to update the points for a given customer at the same time
+
+MySQL Workbrench
+	open a new connection
+		now we have 2 seperate connections or sessions
+
+1. Session
+USE sql_store;
+START TRANSACTION;
+UPDATE customers
+SET points = points + 10
+WHERE customer_id = 1;
+COMMIT;
+
+2. Session
+USE sql_store;
+START TRANSACTION;
+UPDATE customers
+SET points = points + 10
+WHERE customer_id = 1;
+COMMIT;
+
+	execute scripts line by line
+		1. Session
+		2. Session
+			QueryNameView is running
+				Lost connection to MySQL server during query	
+
+		If another transaction tries to update the same row 
+			it has to wait until the first transaction is complete. 
+				Either commited or ruled out

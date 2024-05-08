@@ -1,0 +1,52 @@
+USE sql_store;
+
+START TRANSACTION;
+
+INSERT INTO orders (customer_id, order_date, status)
+VALUES (1, '2019-01-01', 1);
+
+INSERT INTO order_items
+VALUES (LAST_INSERT_ID(), 1, 1, 1);
+
+COMMIT;
+
+
+-- simulate the scenario, second statement fail
+	our transaction is going to fail. So our transaction is going to get rolled back
+		and the change made by the first statement is going to get undone automatically
+
+	Workbrench
+		Query -> Execute Curent Statement
+			execute current statement
+				line by line
+			ctrl + enter (put mouse cursor on the transaction)
+				close
+					Instance Local (simulates the scenario where the client disconnects from the server)
+
+
+There are situations where we may want to do some error checking and manually roll back a transaction.
+	In those case insted of the commit statement
+		we use the roll back statement
+
+USE sql_store;
+
+START TRANSACTION;
+
+INSERT INTO orders (customer_id, order_date, status)
+VALUES (1, '2019-01-01', 1);
+
+INSERT INTO order_items
+VALUES (LAST_INSERT_ID(), 1, 1, 1);
+-- this will rollback the transaction and undue the changes
+ROLLBACK;
+
+
+Mysql wrapped every single statement inside a transaction, and then it will commit
+	if that statement didn't return an error.
+		Whenever we have 
+			INSERT, update, delete
+				MySQL wraps it inside a transactio and then it will commit automatically
+					This is controlled using a system called auto commit
+
+-- autocommit
+SHOW VARABLES LIKE 'autocommit'		

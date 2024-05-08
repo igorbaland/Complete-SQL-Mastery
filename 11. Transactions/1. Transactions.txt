@@ -1,0 +1,56 @@
+A group of SQL statements that represent a single
+
+All the statements should be completed successfully or the transaction will fail.
+Example bank transaction
+	When we transef  10 dollars from our account to our friends account,
+		10 dollars should be taken out of our account
+			and deposit it into our friends account
+
+	So we have two operations and this two operations together represent 
+
+		a single unit of work
+
+
+	Either both these operations should complete sucessfully
+		or if the first operation suceeds 
+			but the second operation failed
+
+				we need to roll back or revert the changes by the first operation
+
+
+We use transaction in situation, where we want to make multiple changes to a database
+	and we want all these changes to succeed or fail together as 
+		a single unit
+
+
+Let's say we want to store an order with an item in our database, we need two SQL statements to store this order
+What if INSERT the order record
+	but the server crashes at the time we are going to insert ther order item
+		We will end up with an incomplete order
+			and our databasewill not be in a consistent state.
+
+
+ACID properties
+	
+	Atomicity, 
+		our transactions are like atoms, they are unbreakable. 
+		Each transaction is a single unit of work 
+			no matter how many statements it's contains
+		Either  all this statements get executed sucessfully and the transaction is comitted or
+			the transaction is rolled back and all these changes are undone
+
+	Consistency, 
+		with this transactions, our database will always remain in a consistent state.
+			We don't end up with an order without item
+
+	Isolation,
+		these transactions are isolated or protected from each other
+			if they tried to modify the same data
+		They cannot interfare with each other
+		If multiple transactionss try to update the same data,
+			the rows that are being affected get locked, so only one transaction at a time
+				can update those rows, other transactions have to wait for that transaction to complete.  
+
+	Durability
+		once a transaction is commited the changes made by the transaction are permanent
+			if we have a failure or a system crash, we are not going to lose the system changes

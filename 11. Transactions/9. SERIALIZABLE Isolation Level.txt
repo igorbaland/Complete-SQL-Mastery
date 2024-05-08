@@ -1,0 +1,25 @@
+Session 1
+USE sql_store;
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+START TRANSACTION;					
+
+		-- 1. wait execute current statement
+			-- waiting for update to finish
+
+SELECT * FROM customers WHERE state = 'VA';
+
+		-- after 3. we can execute select
+		
+COMMIT;
+
+Session 2
+USE sql_store;
+START TRANSACTION;
+UPDATE customers		
+
+		-- 2. update current statement
+			
+SET state = 'VA'
+WHERE customer_id = 3;
+COMMIT;
+		-- 3. commit

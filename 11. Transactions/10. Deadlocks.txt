@@ -1,0 +1,30 @@
+Deadlocks
+	happens, when different transcactions cannot complete
+		because each transaction holds a lock  that the other needs
+			Both transactions keep waiting for each other and never release their lock.
+			
+
+-- change the order of statement
+
+session 1
+USE sql_store;
+START TRANSACTION;
+UPDATE customers SET  state = 'VA' WHERE customer_id = 1;
+UPDATE orders SET status = 1 WHERE order_id = 1;
+COMMIT;
+
+session 2
+USE sql_store;
+START TRANSACTION;
+
+-- change the order of statements
+
+UPDATE orders SET status = 1 WHERE order_id = 1;
+UPDATE customers SET  state = 'VA' WHERE customer_id = 1;
+COMMIT;
+
+
+10:30:24	UPDATE orders SET status = 1 WHERE order_id = 1	Error Code: 1213. Deadlock found when trying to get lock; try restarting transaction	0.000 sec
+
+
+
