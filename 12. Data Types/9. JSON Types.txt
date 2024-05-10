@@ -1,0 +1,164 @@
+In MySQL we can also store JSON Documents. 
+	In case we are not familiar with JSON or JavaScript Object Notation, it's basically alightweight format
+		for storing and transfering data over internet. 
+			It's used heavily in web and mobile applications. So most of the time,
+				our mobile apps send our data to the backend using json.
+
+In JSON we use curly braces to define an object. Inside these bracers, we can have one or more key/value pairs.
+Key 
+	are always strings, so we need to surround them with quotes. 
+
+Values 
+	can be anything, they can be strings, numbers, booleans or other other objects.
+
+-----
+JSON
+{
+	"key": value
+}
+
+Create JSON TABLE Column
+_________
+In our SQL store database, let's open up the products table and add a new column here. We are going to call that properties, 
+	to store additional properties about each product. For example, 
+		clothes can have a size and color, but things like TV have other specs like weight, dimension and so on.
+			So it's not a good idea to add several columns in this table
+				where only a subset of these columns apply to each product. This is where we can use JSON 
+				to easily store multiple key value pairs about each product.
+
+So we call this column properties and set it's type to JSON. Alright, now let's apply the changes, 
+
+
+How to use JSON Type
+______
+1. Standard Way to crate JSON type
+
+USE sql_store;
+
+UPDATE products
+SET properties = '
+{
+	"dimensions": [1, 2, 3],
+    "weight": 10,
+    "_comment": "Nested Object - manufacturer",
+    "manufacturer": { "name": "sony" } 
+}
+'
+WHERE product_id = 1;
+
+2. In MySQL we have a few functions for creating JSON objects.
+
+USE sql_store;
+
+UPDATE products
+SET properties = JSON_OBJECT(
+	'weight', 10,
+	'dimensions', JSON_ARRAY(1, 2, 3),
+    'manufacturer', JSON_OBJECT('name', 'sony')
+)
+WHERE product_id = 1;
+
+
+Extract JSON Type
+______________
+Extract is the benefit of defining this column as a json type, as opposed to varchar, becaus
+	with strings, it's very difficult to extract key-value-pairs in a json object.
+
+	Let's say from the properties column we only want extract the weight, so we call
+		JSON_EXTRACT(
+			firstArgument, 			-- json object, in this case properties
+			secondArgument			-- is the path, here we the string '$.weight'
+								-- $ represents the current JSON document
+								-- . use a period to access indidual properties or keys
+
+SELECT product_id, JSON_EXTRACT(properties, '$.weight') AS weight		-- only AS we got JSON_EXTR...
+FROM products
+WHERE product_id = 1; 
+
+2. The shorter way to write this code
+Instead of calling the json_extract function, we can use a special operator
+	to access incividual properties in a json object.
+	
+	We start wit our properties column, then we add this operator,
+		hyphen greater then
+			->
+				column path operator
+			
+			and than we add our path 
+			'$.weight'
+
+SELECT product_id, properties -> '$.weight' AS weight		-- return exact the same result as before
+FROM products
+WHERE product_id = 1; 	
+
+What if we are dealing with a key who is value an array, like the dimensions
+_______		
+properties -> '$.dimensions'
+	output [1, 2, 3]
+		but we can also access indidual items in this array
+		
+		properties -> '$.dimensions[0]'
+		
+What about working with nested objects? Like the manufacture property
+_________
+properties -> '$.manufacturer'
+	return a json object
+		{"name":"sony"}
+
+properties -> '$.manufacturer.name'		
+	"sony"
+		because sony is a string, we see double quotes here.
+		Some times this is not desirables. For example, we might have this expression in a where clause
+		and let's say we only want to get products 
+			who is manufacturer is sony. We don't want to get rid of these quotes, 
+				that is where we use another greater than sign
+				
+				properties ->> '$.manufacturer.name'	
+					sony
+					
+				SELECT product_id, $.manufacturer.name' AS weight
+				FROM products
+				WHERE properties ->> '$.manufacturer.name' = 'sony'; 
+			
+Updating Json object in our database
+_________
+Let's say we want to change the weight of this product, 
+	we don't want to reset this entire object, we only want to update the weight property
+	
+	How can we do this? That is when we use the 
+		JSON_SET() function
+		
+			the first argument
+				JSON object
+					properties,
+				
+				Now we add multiple key-value pairs to this object.
+				
+				'$.weight', 20,
+				'$.age', 10
+				
+USE sql_store;
+
+UPDATE products
+SET properties = JSON_SET(
+	properties,
+	'$.weight', 20,
+	'$.age', 10
+)
+WHERE product_id = 1;
+
+
+
+Remove
+_________
+UPDATE products
+SET properties = JSON_REMOVE(
+	properties,
+	'$.weight',			--list one ore more keys, that sould be remove
+	'$.age'
+)
+WHERE product_id = 1;
+					
+		
+			
+

@@ -1,0 +1,68 @@
+We use integer to store the whole numbers
+	that don't have a decimal point like
+		1,2,3,4.
+		
+In MySQL we have 5 integer types
+	and these are different in terms of the number of bytes 
+		they use the range of values can store.
+			Obviously the more bytes we have the larger the numbers we can store.
+
+TINYINT
+	1byte, 2^7
+		[-128, 127]
+		
+if we mark a numeric column as unsigned 
+	it can only assign positive numbers.
+			
+UNSIGNED TINYINT
+	[0, 255]
+		age
+		
+SMALLINT
+	2 bytes
+		[-32K, 32K]
+		
+MEDIUMINT
+	3 bytes
+		[-8M, 8M]
+		
+INT
+	4 bytes
+		[-2B, 2B]
+		
+If we try to store value outside the range of a columns data type
+	MySQL throws an error saying the values of range.
+		Our insert or update operations will fail.
+Also apart from usigned, numeric types have another attribute and 
+	that is called
+		ZEROFILL
+			They always have the same numbers of digits
+			
+			When we defining the numeric column, we can specify the display size
+			in parenthesis, for example
+				INT(4) => 0001	(always have 4 digits)
+					the number 1
+						will be part of 3x 000
+						
+As the best practice 
+	Use the smaller data type that suits we needs
+		With this our database will be
+			- smaller in size and
+			- our queries will execute faster
+			
+	For example,
+		if we want to store the age of people,
+			we can use an 
+				UNSIGNED TINYINT
+					1 byte is sufficient to store people's age
+					
+	We may think that saving a byte or two  doesn't really matter these days,
+		because this space is cheap,
+		that is true, but if we are dealing with large amounts of data,
+			our queries will perform better,
+				if we use every byte consciously
+					because these bytes of data will have to transferred between 
+						the disk and the memory.
+							The less data we have in memory,
+								the faster our queiries are going to be.  
+									Keep things smaller and more compact.

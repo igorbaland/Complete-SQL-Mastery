@@ -1,0 +1,15 @@
+There are times where we need to store 
+	- yes or
+	- no kind of value.
+		true or false
+		
+BOOL
+
+BOOLEAN
+---
+UPDATE posts
+SET is_published = TRUE # or FALSE
+					1			0
+-we can write code like this
+UPDATE posts
+SET is_published = 1 

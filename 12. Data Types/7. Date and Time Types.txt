@@ -1,0 +1,14 @@
+In MySQL we have 4 data types
+	for storing date and time values.
+
+DATE
+	without a time component
+TIME
+
+DATETIME
+	8 bytes
+
+TIMESTAMP
+	4 bytes (up to 2038)
+
+YEAR

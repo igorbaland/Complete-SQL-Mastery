@@ -1,0 +1,10 @@
+MySQL Data Types
+	
+	String Types
+	Numeric Types
+	Data and Time Types
+	Blob Types
+		for storing binary data
+	Special Types
+		for storing geographical or geography values
+

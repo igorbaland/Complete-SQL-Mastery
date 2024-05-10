@@ -1,0 +1,47 @@
+Enums
+	there are times that we want to restrict the values for a column
+		to a limited list of strings
+		
+	For example, we might have a column called size
+		and in this column, we only want to allow the values
+			small
+			medium
+			large
+			
+ENUM('small', 'medium', 'large')
+-- similar to enum 
+SET(...)
+	can store multiple values
+		we specify the list of allowable values, and the we can store multiple values
+			in a column. 
+
+Enums are in my opinion
+	generally bad and we should avoid them
+		1. The first reason is changing the members of an enum can be expensive.
+			For example, let's say tomorrow we decide to come back to our products
+			table and add a new member (.., ..., +) or rename
+				MySQL is going to rebuild this entire table
+					and this can be expensive if we have a millions of records in this table.
+				Also with this approach we can add a dditional attributes to each member. 
+					For example, what  if we want to include the actual measurements for each size?
+						We can do that. 
+				Also, if we want to get the list of all possible sizes 
+					and display them in a drop down list in our application, 
+						we have to do a bit more work, it's not that easy. 
+				Plus these enums are not reuseable, so if we have another table
+					and we want to reuse these values there. 
+					In that table we need to redefine that enum with these members
+					and that duplication means if we decide to make a change in one of these members
+					we will have to apply the change in multiple places.
+					
+				These are some of the reasons I believe enums are bad, and we should avoid them.
+			
+A better approach is to have a separate table called sizes. 
+	In this table, we can store all the sizes
+		and any additional attributes they have like their measurement. 
+			We can reuse this table in multiple places and
+				if we want to get all the sizes,
+					we write a single select statement, it's really easy.
+	We refer to this kind of a table as a 
+		lookup table. 
+					

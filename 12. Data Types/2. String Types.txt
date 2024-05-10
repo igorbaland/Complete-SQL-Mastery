@@ -1,0 +1,59 @@
+The most common
+	CHAR(x)
+		fix-length strings
+			
+			we use them to store numeric values, like
+				zip code
+				phone numbers
+					because we don't use these values in mathematical operations
+			
+	VARCHAR(x)
+		max 65.535 (~64KB)
+			(50)
+				username
+				password
+			(255)
+		
+			for medium-legth strings	
+				if store something that is longer 
+					we will get truncated
+						to prevent that 
+							we can use*
+	
+	*MEDIUMTEXT
+		max: 16 mb 
+	
+			which allows us to store roughly up to 16 million characters
+				This is good for storing 
+					json objects
+					cs view string
+					
+	LONGTEXT
+		max: 4 GB
+			for storing 
+				book 
+				years of log files
+				
+	--------
+	TINYTEXT
+		max: 255 bytes (charecters)
+		
+	TEXT
+		max: to 65.000(64kb) characters just like varchar
+		
+		But for this range of characters it's better to use
+			the VARCHAR type
+				because it can be 
+					indexed
+						Basically to understand
+							we use indexes to speed our query, we will talk about later
+							
+							
+								Bytes
+	Englisch languages 			1	
+		if the varchar(10)			column = 10 bytes
+	European Middle-eastern		2
+	Asian 						3
+		if the varchar(10)			column = 30 bytes
+				
+									

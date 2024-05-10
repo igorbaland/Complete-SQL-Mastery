@@ -1,0 +1,24 @@
+We use blob types to store large amounts of binary data,
+	like images, videos, pdfs, word files
+	
+TINYBLOB
+	255 bytes
+	
+BLOB
+	65 KiloBytes
+
+MEDIUMBLOB
+	16 MB
+	
+LONGBLOB
+	4 GB
+	
+Generally speaking it's better to keep files out of our databases, 
+	because relational databases are designed for working with 
+		structural relational data 
+		
+Problems with storing files in a database
+	Increased database size
+	Slower backups
+	Performance problems
+	More code to read/ write images

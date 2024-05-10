@@ -1,0 +1,57 @@
+Rationals
+	for storing numbers with a decimal point
+
+DECIMLA(p, s)
+	useful for storing fixed-point numbers
+		these are numbers that have a fixed number of digits
+			after the decimal point 
+				like monetary values
+				
+	When we using the decimal type
+		we need to suppl two arguments:
+			- precision
+				precision specify the maximum number of digits
+				and this can be between
+					1-65
+			- scale
+				determines the number of digits after the decimal point
+		
+				For example, with a decimal of 9 of 2, we can store a number with maximum
+				of 9 digits, we have two digets after, and 7 digits before the decimal point.
+
+Also this decimal type has a few synonyms,
+	they are dec numeric and fixed
+
+DEC
+
+NUMERIC
+
+FIXED
+-----
+we also have
+
+FLOAT
+	4b
+	
+DOUBLE
+	8b
+
+these are used in scientific calculations. If we want to perform calculations
+	with very large of very small numbers, we should use these types
+	
+	Just remember these types don't store the exact values
+		they use an approximation
+			that's the reason they allow us to store really large or really small numbers
+______________			
+If we want to work with exact values like monetary value
+	we should use 
+		DECIMAL type
+
+If we want to work with really large or small numbers in scientific calculations 
+	and the precision is not important
+		we should use 
+			FLOAT
+			DOUBLE
+
+			
+			
